@@ -12,7 +12,7 @@ public class SinglyLinkedListNode<T>
 
 }
 
-public class SinglyLinkedList<T>
+public class SinglyLinkedList<T> : ICollection<T>
 {
     public SinglyLinkedListNode<T>? Head { get; private set; }
     public SinglyLinkedListNode<T>? Tail { get; private set; }
@@ -43,7 +43,7 @@ public class SinglyLinkedList<T>
     public void AddTail(T value)
     {
         AddTail(new SinglyLinkedListNode<T>(value));
-    }   
+    }
 
     public void AddTail(SinglyLinkedListNode<T> node)
     {
@@ -83,7 +83,7 @@ public class SinglyLinkedList<T>
         {
             return;
         }
-        
+
         if (Count == 1)
         {
             RemoveHead();
@@ -94,14 +94,15 @@ public class SinglyLinkedList<T>
 
         while (currentNode != null)
         {
-            if (currentNode.Next == null) {
+            if (currentNode.Next == null)
+            {
                 previousNode!.Next = null;
                 Tail = previousNode;
                 Count--;
             }
             previousNode = currentNode;
             currentNode = currentNode.Next;
-        } 
+        }
     }
 
     public SinglyLinkedListNode<T>? Find(T value)
@@ -168,5 +169,42 @@ public class SinglyLinkedList<T>
         }
 
         return false;
+    }
+
+    public void Clear()
+    {
+        Head = null;
+        Tail = null;
+        Count = 0;
+    }
+
+    public void CopyTo(T[] array, int arrayIndex)
+    {
+        var currentNode = Head;
+        while (currentNode != null)
+        {
+            array[arrayIndex++] = currentNode.Value;
+            currentNode = currentNode.Next;
+        }
+    }
+
+    public bool IsReadOnly
+    {
+        get { return false; }
+    }
+
+    public IEnumerator<T> GetEnumerator()
+    {
+        var currentNode = Head;
+        while (currentNode != null)
+        {
+            yield return currentNode.Value;
+            currentNode = currentNode.Next;
+        }
+    }
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
     }
 }
