@@ -103,4 +103,32 @@ public class SinglyLinkedList<T>
             currentNode = currentNode.Next;
         } 
     }
+
+    public SinglyLinkedListNode<T>? Find(T value)
+    {
+        var currentNode = Head;
+        while (currentNode != null)
+        {
+            if (currentNode.Value!.Equals(value))
+            {
+                return currentNode;
+            }
+            currentNode = currentNode.Next;
+        }
+        return null;
+    }
+
+    public bool Contains(T value)
+    {
+        var currentNode = Head;
+        while (currentNode != null)
+        {
+            if (currentNode.Value!.Equals(value))
+            {
+                return true;
+            }
+            currentNode = currentNode.Next;
+        }
+        return false;
+    }
 }
