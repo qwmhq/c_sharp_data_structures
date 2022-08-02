@@ -131,4 +131,42 @@ public class SinglyLinkedList<T>
         }
         return false;
     }
+
+    public void Add(T value)
+    {
+        AddTail(value);
+    }
+
+    public bool Remove(T value)
+    {
+        if (Count == 0)
+        {
+            return false;
+        }
+        if (Head!.Value!.Equals(value))
+        {
+            RemoveHead();
+            return true;
+        }
+        if (Tail!.Value!.Equals(value))
+        {
+            RemoveTail();
+            return true;
+        }
+
+        SinglyLinkedListNode<T>? currentNode = Head, previousNode = null;
+
+        while (currentNode != null)
+        {
+            if (currentNode.Value!.Equals(value))
+            {
+                previousNode!.Next = currentNode.Next;
+                Count--;
+            }
+            previousNode = currentNode;
+            currentNode = currentNode.Next;
+        }
+
+        return false;
+    }
 }
