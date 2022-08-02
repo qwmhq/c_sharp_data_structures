@@ -143,6 +143,63 @@ public class SinglyLinkedListTests
         Assert.IsFalse(ints.Remove(11));
     }
 
+    [TestMethod]
+    public void ClearTest()
+    {
+        var ints = Create(1, 10);
+
+        ints.Clear();
+    }
+
+    [TestMethod]
+    public void CopyToTest()
+    {
+        var ints = Create(1, 10);
+
+        var intsArray = new int[10];
+        ints.CopyTo(intsArray, 0);
+
+        var currentNode = ints.Head;
+        int currentIndex = 0;
+        
+        while (currentNode != null)
+        {
+            Assert.AreEqual(currentNode.Value, intsArray[currentIndex++]);
+            currentNode = currentNode.Next;
+        }
+
+        var largerIntsArray = new int[20];
+        ints.CopyTo(largerIntsArray, 10);
+
+        currentNode = ints.Head;
+        currentIndex = 10;
+        
+        while (currentNode != null)
+        {
+            Assert.AreEqual(currentNode.Value, largerIntsArray[currentIndex++]);
+            currentNode = currentNode.Next;
+        }
+    }
+
+    [TestMethod]
+    public void IsReadOnlyTest()
+    {
+        var ints = Create(1, 10);
+        Assert.IsFalse(ints.IsReadOnly);
+    }
+
+    [TestMethod]
+    public void GetEnumeratorTest()
+    {
+        var ints = Create(1, 10);
+        int expected = 1;
+        foreach (int i in ints)
+        {
+            Assert.AreEqual(i, expected++);
+        }
+    }
+
+
     private SinglyLinkedList<int> Create(int start, int end)
     {
         var ints = new SinglyLinkedList<int>();
