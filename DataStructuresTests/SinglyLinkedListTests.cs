@@ -86,6 +86,34 @@ public class SinglyLinkedListTests
         Assert.AreEqual(0, ints.Count);
     }
 
+    [TestMethod]
+    public void FindTest()
+    {
+        var ints = Create(1, 10);
+
+        for (int i = 1; i <= 10; i++)
+        {
+            Assert.AreEqual(i, ints.Find(i)!.Value);
+        }
+
+        Assert.AreEqual(null, ints.Find(0));
+        Assert.AreEqual(null, ints.Find(11));
+    }
+
+    [TestMethod]
+    public void ContainsTest()
+    {
+        var ints = Create(1, 10);
+
+        for (int i = 1; i <= 10; i++)
+        {
+            Assert.AreEqual(true, ints.Contains(i));
+        }
+
+        Assert.AreEqual(false, ints.Contains(0));
+        Assert.AreEqual(false, ints.Contains(11));
+    }
+
     private SinglyLinkedList<int> Create(int start, int end)
     {
         var ints = new SinglyLinkedList<int>();
