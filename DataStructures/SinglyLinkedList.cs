@@ -163,6 +163,7 @@ public class SinglyLinkedList<T> : ICollection<T>
             {
                 previousNode!.Next = currentNode.Next;
                 Count--;
+                return true;
             }
             previousNode = currentNode;
             currentNode = currentNode.Next;
