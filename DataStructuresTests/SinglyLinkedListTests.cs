@@ -132,15 +132,16 @@ public class SinglyLinkedListTests
     {
         var ints = Create(1, 10);
 
-        for (int i = 10; i >= 1; i--)
-        {
-            Assert.AreEqual(i, ints.Count);
-            Assert.IsTrue(ints.Remove(i));
-            Assert.IsFalse(ints.Contains(i));
-        }
+        var values = new int[] {2, 5, 7, 8, 1, 4, 9, 6, 10, 3};
 
-        Assert.IsFalse(ints.Remove(0));
-        Assert.IsFalse(ints.Remove(11));
+        var expectedCount = 10;
+
+        foreach (var value in values)
+        {
+            Assert.AreEqual(expectedCount--, ints.Count);
+            Assert.IsTrue(ints.Remove(value));
+            Assert.IsFalse(ints.Contains(value));
+        }
     }
 
     [TestMethod]
