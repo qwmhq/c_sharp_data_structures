@@ -42,7 +42,7 @@ public class SinglyLinkedListTests
             ints.AddTail(i);
             Assert.AreEqual(i, ints.Count);
             Assert.AreEqual(i, ints.Tail!.Value);
-            Assert.AreEqual(null, ints.Tail.Next);
+            Assert.IsNull(ints.Tail.Next);
         }
 
         int expected = 1;
@@ -66,7 +66,7 @@ public class SinglyLinkedListTests
             ints.RemoveHead();
         }
 
-        Assert.AreEqual(null, ints.Head);
+        Assert.IsNull(ints.Head);
         Assert.AreEqual(0, ints.Count);
     }
 
@@ -82,7 +82,7 @@ public class SinglyLinkedListTests
             ints.RemoveTail();
         }
 
-        Assert.AreEqual(null, ints.Tail);
+        Assert.IsNull(ints.Tail);
         Assert.AreEqual(0, ints.Count);
     }
 
@@ -96,8 +96,8 @@ public class SinglyLinkedListTests
             Assert.AreEqual(i, ints.Find(i)!.Value);
         }
 
-        Assert.AreEqual(null, ints.Find(0));
-        Assert.AreEqual(null, ints.Find(11));
+        Assert.IsNull(ints.Find(0));
+        Assert.IsNull(ints.Find(11));
     }
 
     [TestMethod]
@@ -107,11 +107,11 @@ public class SinglyLinkedListTests
 
         for (int i = 1; i <= 10; i++)
         {
-            Assert.AreEqual(true, ints.Contains(i));
+            Assert.IsTrue(ints.Contains(i));
         }
 
-        Assert.AreEqual(false, ints.Contains(0));
-        Assert.AreEqual(false, ints.Contains(11));
+        Assert.IsFalse(ints.Contains(0));
+        Assert.IsFalse(ints.Contains(11));
     }
 
     [TestMethod]
@@ -150,6 +150,10 @@ public class SinglyLinkedListTests
         var ints = Create(1, 10);
 
         ints.Clear();
+
+        Assert.AreEqual(0, ints.Count);
+        Assert.IsNull(ints.Head);
+        Assert.IsNull(ints.Tail);
     }
 
     [TestMethod]
